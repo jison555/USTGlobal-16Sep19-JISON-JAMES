@@ -1,0 +1,21 @@
+<div>
+<input type="text" name="" id="" class="col-md-3 offset-3 mt-5"
+                 placeholder="Search By Movie Name" style="padding: 1%;" (keyup)='sendData($event)'>
+
+</div><br><br><br>
+
+
+
+<div class="float-left col-md-3" *ngFor="let s of values">
+
+        <div class="form-group">
+            <p class="card">{{s.Title}}</p>
+        </div>
+        <div class="form-group">
+            <p class="card">{{s.Year}}</p>
+        </div>
+        <div class="form-group">
+            <img src="{{s.Poster}}" alt="" class="card">
+        </div>
+
+</div>
