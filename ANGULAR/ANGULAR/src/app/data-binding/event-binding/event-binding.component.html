@@ -1,0 +1,8 @@
+4<button class="btn btn-primary" (click)="printAlertMessage()">click</button>
+
+
+
+<input type="text" id="search" class="form-control.col-md-6.offset-3.mt-4.mb-4" (input)="dataInput($event)" placeholder="enter something">
+
+<h1 col-md-6 offset-3 mb-5 mt-5>{{inputdata}}</h1>
+<h2 [innerText]="inputdata"></h2>

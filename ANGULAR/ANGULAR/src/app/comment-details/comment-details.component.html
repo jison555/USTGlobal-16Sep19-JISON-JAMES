@@ -1,0 +1,11 @@
+<app-comment (getComment)="getAllComments($event)"></app-comment> 
+
+
+<div class="col-md-4 offset-4 mt-1 card card-body" *ngFor="let comment of Comments" style="background-color: #eeee">
+    <h3 class="text-center text-white" style="background-color: royalblue;border-radius: 2px">{{comment.title}}</h3>
+    <p>{{comment.desc}}</p>
+</div>
+
+
+
+<!-- child comment will be displayed at the top of the page..after that the the parent component will be dispalayed -->
