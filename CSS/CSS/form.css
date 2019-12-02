@@ -1,0 +1,45 @@
+form{
+    border: 1px solid black;
+    width: 300px;
+    height:300px;
+    margin: 100px 0px 1000px 700px;
+    /*margin-top: 100px;
+    margin-left: 250px;*/
+    text-align: center;
+    font-size: 20px;
+    font-family:cursive;
+    border-radius: 25px;
+    background-image: url(/image/Isopoly_01.gif);
+    background-size: cover;
+    color: white;
+}
+body{
+    background-image: url(/image/niederhorn-4425606_1280.jpg);
+    background-size: cover;
+}
+/*Attribute Selector*/
+input[type="text"],input[type="password"]{
+width: 225px;
+height: 25px;
+border: 1px solid black;
+border-radius: 50px;
+outline: none;/*remove outline*/
+border: 2px solid blue;
+}
+/*Pseudo selector*/
+input[type="text"]:focus,input[type="password"]:focus{
+    
+}
+input[type="submit"]{
+    margin-top: 20px;
+    padding: 10px 10px;
+    border-radius: 50px;
+    background-color:blue;
+    outline: none;/*remove outline*/
+    color: white;
+    border: 1px solid red;
+}
+input[type="submit"]:hover{
+    background-color:green;
+    border: 2px solid blue;
+}
