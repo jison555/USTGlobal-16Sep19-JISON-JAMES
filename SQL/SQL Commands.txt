@@ -1,0 +1,607 @@
+#*#*#*#*#SQL#*#*#*#*#*#*
+SQL(structure Query language)-->it is a language is used to interact with a database.
+DATA--> it is a rawfacts or information.
+DATABASE--> it is a storage device is used to store a data in a organised way.
+DBMS-->its a combination of database and mangement system to managing a data.
+
+Types of DBMS:
+1.object oriented DBMS 
+2.Network DBMS
+3.Hiearchical DBMS
+4.Relational DBMS--->it is used establish a relation between two or more table
+
+-->SQL is the only language is used to interact with RDBMS.
+-->data is stored in the form of relation
+-->in that data is stored in the form relation
+TABLE-->it is a logical representation data .it consist of a rows and columns
+columns-->properties/attributes.
+rows-->touples/fields
+
+CELL-->it is intersection of rows and columns
+-->each and every cell is atomic in nature(with in a single cell we can store only one data).
+
+***IN RDBMs application data inserted can be validated in two ways.
+1.dataTypes-->it is used to define a type of data.(mandatory0
+2.Constarints-->it is used to restrict a data before entering into a table.
+
+Types of dataTypes
+1.number
+2.char-->fixed length of memory location.
+3.varchar-->variable length of memory location.
+4.date-->YYYY-MM-DD
+5.Time-->HH:MM:SS
+6.BLOB-->it is used for binary large objects.
+
+Types of Constraints
+NULL-->it is a empty value it is not equal to zero or one .we can not applay any mathematical operation
+
+1.NOTNULL-->it contains atleast some value.it not accept a null value.
+
+2.UNIQUE-->it is used ensure that column must conatins only unique values will not have duplicate values.
+
+3.Check-->it is used to restrict a data into a column based on condindtion.
+
+4.DEFAULT-->here we don't provide any constarins.
+
+5.PRIMARY KEY---> it is a combination of not null and unique constrains.
+-->it is used to identifies each records uniquely in a table.
+-->a table can contain only one primary key.
+-->it is not mandatory but highly recomended.
+
+6.FORIEGN KEY--> it is used establish a relation between a two tables
+-->in a table can have more than one foreign key
+--> it accept null as well as unique values.
+-->foreign key in a child table it should be primary key in a parent table.
+-->where we write foreign key that table is child table
+-->where foreignkey is actually present that table is parent table.
+-->we can not insert a value in column defined as a foreignkey which is not present in its parent table column.
+
+##SQL statements.
+1.DDL(data definition language)
+2.DML(data manipulation language)
+3.DQL(data query language)
+4.TCL(transction control language)
+5.DCL(data control language)
+
+show databases;
+ -it showa all databases names.
+
+##DDL Statements--> it deals with the Structure of the database.
+1.create
+create database ust_db;->it is used create database.
+use ust_db;-> it is used to use the particular database.
+
+create table product(pid int,pname varchar(10),quantity int);->it is used create table
+show tables;->it shows all the tables present inside database.
+desc product;-> it describe the structure of the table.
+
+2.drop
+drop table product;-> it is used to drop the structure of table and data present inside the table.
+drop database ust_db;->it is used to drop a database structure.
+
+3.alter
+alter table product add column price int;->it is used to alter the table by adding the column.
+alter table product change column price cost int;->it is used to alter the column name by changeing the name of the column name. 
+alter table product drop column cost;-> it is used to ater a table b droping a column name.
+
+4.rename
+rename table product to product_info;-> we can rename the table name and column name by using the rename commands
+
+5.truncate-->it is used to removes a data permanenty from a table we can not rollback
+syntax===>truncate table tablename;
+example:
+trunctae table product_info;
+
+
+##DML Statements->it deals with data we can manipulate the data by using insert,update,delete commands.
+
+1.insert->it is used to insert a data inside a table
+
+synatx===>  insert into tablename(column name1,column name2,........column namen)vlaues(value1 value2,value3);
+	insert into tablename values(value1,value2.......);
+mysql> insert into  department values(10,'admin','mumbai'),(20,'operation','pune'),(30,'maintanance','hyderbad'),(40,'development','banglore');
+Example:
+insert into product_info(pid,pname,quantity)values(10,'abc',10);
+insert into product_info(pid,pname,quantity)values(20,'xyz',12);
+
+select*from product_info;->it is used to dispays/select a data present inside a table.
+
+To insert a data at particular column:
+insert into product_info(pid,pname)values(26,'dfh');
+
+To insert a more records or values at a time;
+insert into product_info(pid,pname,quantity)values(30,'err',3),(32,'qwe',12);
+
+2.update->it is used to update a data inside a table.
+
+syantax===>update tablename set columnname = value;
+	===>update tablename set columnname = value where columnname=value;
+
+example:
+update product_info set quantity=100;
+update employee set age =23 where eid =5;
+3.delete->it is used to delete a records from table name.
+
+syantax==> delete from tablename;
+Example:
+delete from product_info;
+
+
+###DQL Statements.-->it is used to retrieve a data from database.
+
+1.select
+with the help of select we can retrieve the data from 3 ways
+   1.projection-->it is used select a particular columns
+    synatx ===>select columnname form tablename;
+	examaple;
+	select pname form product_info;
+   2.selection--->it is used to select a data from both columns and rows
+	syntax===>select*from tablename;
+	example:
+	select*from product_info;
+   3.joins-->it is used to retrieve the data from multiple tables.
+
+
+create table employee(eid int unique not null,ename varchar(250)not null,mobileno varchar(100) unique,dob date not null,
+age int not null,doj date not null,bloodGroup varchar(100) not null,deptno int ,salary int ,email varchar(100),gender varchar(10), primary key(eid));
+
+alter table employee add column designation varchar(100);
+
+
+
+##Distinct--->it is used to get unique records from a column.
+synatx:select distinct columnname from tablename;
+example:
+select distinct designation from employee;
+select distinct designation,deptno from employee;-->get combination of uniqueness in two column.
+
+##Alias-->it is used to give a temporary names to the table or column name in table.
+
+syntax===>select columnname as aliasname from tablename aliasname;
+select bloodGroup as BloodGroup from employee emp;
+
+##where-->it is used to filter a records in table. and it is only used eith update,delete,select.
+
+select*from employee where eid=5;
+update employee set mobileno=7411668068 where eid=2;
+delete from employee where eid=8;
+
+###Order of Execution
+1.from
+2.where
+3.select
+
+
+###Expressions-->it is a combination of operators and operands.
+
+1.operands
+is divided into 2 types
+   1.columnname
+   2.literals-->actual value
+	it is divided into 3 types
+	1.number
+	2.char-->pass within a single Quotes
+	3.date-->pass within a single Quotes.
+
+##Operators-->operators are special sysmbols are used to perform the operation and produce the result.
+4types
+1.airthmatic operators-->it perform a airthmatic operations
+
+example:
+select salary+5000 from employee;
+
+1.WQTD salary of the employee with 5000 incremented bonus
+select salary+5000 incrementedsalary from employee;
+
+2.WQTD salary of the employee  with 5000 decremented
+select salary-5000 decrementedsalary from employee;
+select salary*12 annualsal from employee;
+select salary/30 onedaysalary from employee;
+
+2.comparasion operators
+examples:
+1.wqtd employee whoes designation is software developer
+select *from employee where designation='software developer';
+
+2.WQTD all the details of the Employee Excluding who is working in deptno 20?
+select*from employee where deptno != 20;
+
+3.WQTD all the details of employee whose salary is greater than 25000;?
+select *from employee where salary > 25000;
+
+4.WQTD all the details of employee whoes age is lessthan 30
+select *from employee where age<30;
+
+5.WQTD name salary emailid mobileno whoes age is greater than equal to 25;
+select ename,salary,email,mobileno from employee where age >=25;
+
+6.WQTD salary whoes salary is getting lessthan or equal to 25000;
+select salary from employee where salary <=25000;
+
+3.Logical Operators
+
+1.WQtD all the employees eho is working in department 20 and salary is greater than 25000?
+select *from employee where deptno =20 and salary >=25000;
+
+2.WQTD name salary from the employee table who is working in deptno 10 and 20?
+select ename,salary from employee where deptno =10 and deptno =20;
+
+3.WQTD employee details whoes designation is tester and age is 25?
+select *from employee where designation ='tester' and age =25;
+
+4.WAQD to display all the records of the employee who is working as a tester or having salary morethan 40000?
+select *from employee where designation='tester' or salary >40000;
+
+5.WAQD name salary age from the employee table who is working in deptno 10 or 40 or 50?
+select ename,salary,age from employee where deptno=10 or deptno=40 or deptno=50;
+select ename,salary,age from employee where deptno=10 or deptno=40 or deptno=70;
+
+6.WQTD employee details whoes age is morethan 25 and bloodgroup is b+?
+select *from employee where age >25 and bloodGroup ='B+';
+
+7.WQTD all the record of the employee excluding tester?
+select*from employee where not designation ='tester';
+select*from employee where designation !='tester';
+
+8.WQTD name of all the employee who is working as a hr or tester and salary is greater than 20000?
+select ename from employee where designation = 'hr' or designation='tester' and salary >20000;
+
+9.WQTD all the employee excluding softwaredeveloper who are working in deptno 40?
+select*from employee where not designation='software developer' and deptno=40;
+
+***order of executoion of logical operators
+1.not
+2.and
+3.or
+
+10.WQTD all the software developer who are working for deptno 10 or 40
+select *from employee where designation='software developer' and (deptno=10 or deptno=40);
+
+
+###Special operators-->are used to perform special operation
+
+1.IN--> it is used for evaluating multiple values
+syntax--->select *from tablename where columnname in(list of values);
+examples==>
+select *from employee where deptno in(10,30,70,40);
+
+1.WQTD all the details of the employee who is working in deptno 40,50,70,80?
+select *from employee where deptno in (40,50,70,80);
+
+2.WQTD name of all the employee who is working as a tester hr and admin;
+select ename from employee where designation in('tester','hr','admin');
+
+3.WQTD details of tester admin software developer who are working in deptno 20 or 30 and salary is greater than 40000?
+select* from employee where designation in('tester','admin','software developer') and deptno in(20,30) and salary>40000;
+
+2.NOT IN--> it is used to deselect/exclude the multiple values 
+synatx-->select *from tablename where columnname not in(list of values);
+examples;
+select *from employee where deptno not in(10,20);
+
+1.WQTD all the record of employee excluding who are working as a tester ,admin,hr?
+select*from employee where designation not in('tester','admin','hr');
+
+2.WQTD all the details of the employee whoes age is 20,25,30,40 exclude all the destails of tester and software developer?
+select *from employee where age in(20,25,30,40) and designation not in('tester','software developer');
+
+BETWEEN-->it is used for searching based on range of values
+synatx-->select*from tablename where columnname between values1 and values2;
+examples==>
+select*from employee where salary between 20000 and 25000;
+
+1.WQTD all the details of employee whoes age is between 20 to 40?
+select *from employee where age between 20 and 40;
+
+2.WQTD all the details of employee who are hire during 2017?
+select *from employee where doj between'2017-01-01' and'2017-12-31';
+
+NOT BETWEEN-->it is used to exclude the range of values
+syntax-->
+select * from tablename where columnname not  between value1 and value2;
+
+1.WQTD all the record of the employee excluding whoes salary is in the range of 25000 to 30000?
+select *from employee where salary not between 25000 and 30000;
+
+
+IS-->it is used to check null values
+syntax==>select*from tablename where columnname is null;
+
+ISNOT-->it is used to check the notnull values
+syntax==>select*from tablename where columnname is not null;
+
+LIKE-->it is used to pattern matching
+Synatax==>select*from tablename where columnname'_%';
+
+pattern-->it's a combination of ordinary character and special character.
+character---->2types
+		1.ordinary character--> 'a' to 'z' , 0 to9;
+		2.special character --> '_' ,'%' 
+
+select*from employee where ename like'r%';
+
+1.WQTD all the details of the employee whoes name start with a?
+select * from employee where ename like'a%';
+
+2.WQTD name of the employee whoes second character is i?
+select ename from employee where ename like'_i%';
+
+3.WQTD the name of the employee  which has atleast two l in their name?
+select ename from employee where ename like'%l%l';
+
+4.WQTD name of the employee whoes name start with s and ends with p;
+select ename from employee where ename like's%p';
+
+5.WAQD all the records of the employee if employee is begins with a or s?
+select * from employee where ename like 'a' or ename like 's';
+
+6.WAQD ename salary whoes is working in depart no 10 or 20 or 30 and designation start with s;
+select ename,salary from employee where deptno in(10,20,30)and designation like's%';\
+
+
+###Functions-->it is a block of code which is used to perform some specific task.
+
+types of functions:
+1.single row functuons/Scalar Function-->it takes n number of inputs and it produce n number of outputs.
+2.multi row functions/Aggregate Functions-->it takes n number of inputs and it produce only one output.
+
+##MULTI ROW FUNCTIONS
+
+select sum(salary) from employee;
+select avg(salary)from employee;
+select min(salary) from employee;
+select max(salary)from employee;
+select count(*)from employee;
+
+
+##ORDERBY clause-->it is used to sort the records in ascending or descending order
+		   by default it will be ascending order.
+synatx==> select*from tablename where condintion orderby columnname asc/desc;
+
+***order of execution
+1.from
+2.where
+3.select
+4.orderby--it will be executed in last.
+
+1.WQTD all the result of the employee and salary should be arrange in descding order
+select *from employee order by salary desc;
+
+
+###SUBQUERY
+-->A query which is written within a another query is called as subQuery or a query inside a another query is called as subquery
+-->always inner query is executed first later it gives a input to the outer query the outer query is executed.
+
+syntax==>
+select*from tablename where columnname operator (select*from tablename);
+
+**types of subQuery
+1.single row subquery-->if the result of innerQuery is only one value.
+2.multi row subquery
+
+1.WQTD all the records of the employee whoes date of joining is same as Ramesha?
+select *from employee where doj=(select doj from employee where ename='ramesha');
+
+2.WQTD 2nd max salary?
+select max(salary)from employee where salary < (select max(salary) from employee);
+
+ALL-->if all the conditions is satisfies then only we get a result set.it is similar to logical or operator
+ANY-->if any condtions is satiesfies then we get a result set.it is similar to logical and operators
+
+
+**MultiRow subquery-->if result of the inner query is morethan one.
+
+syntax-->select*from tablename where columnname specialoperator (select *from tablename);
+
+1.WQTD name of the employee who is working in location which as atleast one 'a'in the location?
+select ename form employee where deptno in(select deptno from department where location like'a%');
+
+2.WQTD all the reocrd of the employee who is working in admin ,operator,development?
+select *from employee where deptno in(select deptno from department where dname in('admin','operation','development'));
+
+
+###GROUP BY--it is used to group the records based on some condition/column name.
+-->it executes row by rows.
+syntax-->select count(*) from tablename group by coloumn name.
+Examples:
+1.select deptno,count(*) from employee group by deptno;
+
+1.WQTD maximum salary for each department?
+select max(salary) from employee group by deptno;
+
+**ORDER of Execution
+1.from
+2.where
+3.groupby
+4.select
+
+2.WQTD highest salary given to hr in each department;
+select max(salary) from employee where designation ='hr' group by deptno;
+
+##HAVING--it is used filter a group by records
+-->having clause is execute after a group by clause.
+-->in that we can pass only one condition.
+syntax -->select * from tablename where condition group by column name having condition;
+
+**order of execution
+1.from
+2.where
+3.group by
+4.having
+5.select
+
+Examples:
+1.WQTD deptno which has atleast 2 employees?
+select deptno from employee group by deptno having count(deptno)>=2; 
+
+ORDER of Execution
+1.from
+2.where
+3.group by
+4.having
+5.select
+6.order by
+
+###TRANSACTION CONTROL LANGUAGE(TCL)
+1.commit-->it is used to save the current transaction
+2.rollback-->it is used to rollback/get the previous transactiion.
+3.savepoint-->it is used to provide points to the transaction.if we declare a savepoint from their we can rollback 
+		without affecting previous transaction.
+
+2.select * from product_info;
+ insert into product_info values(104,'laptop',05); 
+ rollback;
+
+1.select * from product_info;
+  update product_info set pname='mobiles' where pid=104;
+  commit;
+  rollback;
+
+3.savepoint a;
+insert into product_info values(104,'laptop',05);
+select * from product_info;
+update product_info set pname='cars' where pid=105;
+select * from product_info;
+rollback to a;
+select * from product_info;
+
+###JOINS###-->it is used to establish a connection  between a more than one table.
+types of join
+1.cross join/cartesion join
+2.inner join/
+
+
+
+
+1.CROSS JOIN-->record from the first table will be merge with all the record of the second table.
+syntax:-->given by ANSI
+	select * from tablename1 cross join tablename2;
+Exmaple:
+	select*from employee cross join department;
+
+FOR ORACLE-->select*from tablename1,tablename2;
+
+2.INNER JOIN-->it is used to retrive matching records from the tables.
+syntax:-->given by ANSI
+	select*from tablename1 inner join tablename2 on condition;
+Example:
+	select*from employee e inner join department d on e.deptno=d.deptno;
+FOR ORACLE-->select*from tablename1,tablename2 where condition;
+
+3.OUTER JOINS-->it is used retrive a both matching and unmatching records form a tables
+	types of outer joins
+	1.left outer join
+	2.right outer join
+	3.full outer join
+1.LEFT OUTER Join-->it is a combination of matched records/inner join and unmatched records present in the left table
+-->it is used retrive a both matching and unmatching records form a left table.
+syntax:
+	select*from tablename1 left outer join tablename2 on condition;
+FOR ORACLE:
+	select *from tablename1,tablename2 where tablename1.columnaname =tablename2.columnname;
+Example:select*from employee e left outer join department d on e.deptno=d.deptno;
+	
+1.RIGHT OUTER Join-->it is a combination of matched records/inner join and unmatched records present in the right table
+-->it is used retrive a both matching and unmatching records form a right table.
+syntax:
+	select*from tablename1 right outer join tablename2 on condition;
+FOR ORACLE:
+	select *from tablename1,tablename2 where tablename1.columnaname(+)=tablename2.columnname;
+Example:select*from employee e right outer join department d on e.deptno=d.deptno;
+
+3.FULL OUTER JOIN-->it is used retrieves a unmatched records from a tables;
+synatx:
+	select*from tablename1 left outer join tablename2 on condition
+	union
+	select*from tablename1 right outer join tablename2 on condition;
+Examples:
+	select*from employee e left outer join department d on e.deptno=d.deptno
+	union
+	select*from employee e right outer join department d on e.deptno=d.deptno;
+
+4.NATURAL JOIN-->it is similar to inner join where we don't specify the condition.
+-->natural joins provides inner query outputs if their are common column presentelse it returns cartesion join.
+
+synatx:
+	select*from tablename1 natural join tablename2;
+Examples:
+	select*from employee natural join department;
+
+4.SELF JOIN-->it is used joining of two same table by giving a alias name is called as self join	
+	-->we use this join whenever the data to be selected with in the same table but ia should be present in two differnt tables.
+synatx:
+	select*from table1 join table2 on condition.
+For ORACLE-->select*from table1,table2 where condition
+Example:
+	select*from employee e join department d on e.deptno=d.deptno;
+
+@@@ATTRIBUTES@@@
+
+###KEY ATTRIBUTES--> the attributes with the help of which we can identify a records uniquely.
+###NON KEY ATTRIBUTES-->all the attributes expect key attributes is known as non key attributes.
+##PRIME KEY ATTRIBUTES-->among the key attributes an attributes choosen to identify a record uniquely is known as prime key.
+##NON PRIME KEY ATTRIBUTES-->expect prime key attributes all the attributes are non prime key attributes.
+##COMPOSITE KEY-->the combination of two or more key attributes which is used to identify the records uniquely is known as composite key.
+##FOREIGN KEY-->it is used to establish a relation between a two tables.
+##SUPER KEY--> the set of all the key attributes is known as super key attributes.
+
+@@@FUNCTIONAL DEPENDENCY@@@
+-->a relation which exist such that an attributes determine another attributes uniquely that is known as functional dependency.
+
+R->{x,y}
+x-->determinent
+y-->dependent
+
+3types of functional dependancy.
+
+1.Total functional dependency.-->if all the attributes of a relation determine by a key attributes i.e known as total functional dependancy.
+Ex: R->{A,B,C,D}
+A-key attributes
+
+2.Partial functional dependency.-->a relation is set to have partial functional dependancy 
+	*it consist a composite key attributes
+	*their exists a dependancy such that an attribute can be determine by other attribute which is part of composite key attributes
+	-->more than one key attributes
+Ex: R->{A,B,C,D}
+AB-key attributes
+AB->c,d
+A->c,d
+B->c,d
+
+3.Transitive functional dependency.--> A relation is set to have transitive functional dependency if their exist a relation such that 
+		an attribute determine a non key attributes which intern is determined by the key attribute.
+Ex: R->{A,B,C,D}
+A->B
+B->C
+
+@@@NORMALIZATION@@@-->the process of decomposing a table into a smaller table in order to remove redundancy
+			 and anomly by identify dependency is known as normalization.
+		   --> the process of reducing a table to normal form is known as normalizatio.
+		   -->it is a step by step process to simply the tables.
+
+		ID    NAME       SID    Provider   Mobileno
+		---------------------------------------------
+		101   ramesha     10    docomo     7411024475
+		101   ramesha     20    airtel     7411668068
+		101   ramesha     30    vodafone   8722543795
+		101   ramesha     40    jio        7411234534
+
+NORMAL FORM-->a state of table without redundancy and anamoly(the problem which is occured in dml operation)
+		 is known as normal form.
+   
+
+1st NORMAL FORM
+	-->the table is set to be in the 1st normal form if it satiesfy the following condition.
+	1.table should not contains duplicate values/records.
+	2.every cell in the table should be a single value(atomic value).
+2st NORMAL FORM
+	-->the table is set to be in the 2st normal form if it satiesfy the following condition.
+	1.it should follow the 1st normal form.
+	2.table should not contain partial functional depandancy.
+3rd NORMAL FORM
+	-->the table is set to be in the 3rd normal form if it satiesfy the following condition.
+	1.it should satiesfies the 2nd normal form.
+	2.table should not contain transitive functional dependancy.
+
+
+##RELATION MODEL-->a relation between more than one table.
