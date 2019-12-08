@@ -1,0 +1,11 @@
+package com.ustglobal.bean;
+
+import java.util.Date;
+import java.util.List;
+
+public class BookIssue {
+	private Date issueDate;
+	private Date returnDate;
+	private List<Student> student;
+
+}

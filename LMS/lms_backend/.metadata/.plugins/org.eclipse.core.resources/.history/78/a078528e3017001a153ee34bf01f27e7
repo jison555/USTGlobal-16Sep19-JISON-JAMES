@@ -1,0 +1,12 @@
+package com.ustglobal.dao;
+
+import com.ustglobal.bean.BookBean;
+import com.ustglobal.bean.StudentBean;
+
+public interface StudentDAO {
+	public StudentBean login(String USN,String password);
+	public BookBean search(String name);
+	public boolean request(int id);
+	public BookBean getAll();
+
+}

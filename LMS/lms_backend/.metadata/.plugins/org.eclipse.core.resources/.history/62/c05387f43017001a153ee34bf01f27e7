@@ -1,0 +1,47 @@
+package com.ustglobal.dao;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
+
+import com.ustglobal.bean.AdminBean;
+import com.ustglobal.bean.BookBean;
+import com.ustglobal.bean.StudentBean;
+
+public class StudentDaoImpl implements StudentDAO {
+	
+	private EntityManagerFactory factory;
+
+	@Override
+	public StudentBean login(String id, String password) {
+		EntityManager manager = factory.createEntityManager();
+		String jpql = "from AdminBean where id=:id and password=:password";
+		TypedQuery<StudentBean> query = manager.createQuery(jpql, StudentBean.class);
+		StudentBean bean = query.getSingleResult();
+		if(bean!=null) {
+			return bean;
+		} else {
+			return null;
+		}
+		
+	}
+
+	@Override
+	public BookBean search(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean request(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public BookBean getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

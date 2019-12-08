@@ -1,0 +1,37 @@
+package com.ustglobal.service;
+
+import java.util.List;
+
+import com.ustglobal.bean.BookBean;
+import com.ustglobal.bean.StudentBean;
+import com.ustglobal.dao.StudentDAO;
+
+public class ServiceImpl implements StudentService {
+	
+	private StudentDAO dao;
+	
+	@Override
+	public StudentBean login(String id, String password) {
+		
+		return dao.login(USN, password);
+	}
+
+	@Override
+	public BookBean search(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean request(int id, String status) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<BookBean> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

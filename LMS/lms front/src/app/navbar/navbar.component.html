@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg text-light navbar-light bg-success">
+    <a class="navbar-brand" href="#">LMS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link text-light" routerLink="home">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" *ngIf="isAdmin" routerLink="registerStudent">Register Student</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" *ngIf="isAdmin" routerLink="registerlibrarian">Register Librarian</a>
+        </li>
+        <li class="nav-item">
+              <a class="nav-link text-light" *ngIf="isAdmin" routerLink="">Remove Librarian</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" *ngIf="isAdmin" routerLink="">Remove Student</a>
+        </li>
+        <li class="nav-item" *ngIf="isNotLogin">
+            <a class="nav-link text-light"  routerLink="search">Search</a>
+        </li>
+       
+      </ul>
+      <form class="form-inline my-2 my-lg-0">  
+        <a class="nav-link text-light" *ngIf="notLogin" routerLink="login">Login</a>
+        
+        <a class="nav-link text-light" *ngIf="isAdmin" routerLink="logout">Logout</a>
+        <a class="nav-link text-light" *ngIf="isLogin" routerLink="">Profile</a>
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-light" *ngIf="notLogin" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Login As
+          </a>
+          <div class="dropdown-menu"  aria-labelledb="navbarDropdown">
+            <a class="dropdown-item" routerLink="studentlogin">Student</a>
+            <a class="dropdown-item" routerLink="librarylogin">Librarian</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </nav>
